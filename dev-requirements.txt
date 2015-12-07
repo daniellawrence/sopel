@@ -1,2 +1,5 @@
 pytest
-pep8==1.4.6
+pep8
+coveralls
+flake8
+ipython

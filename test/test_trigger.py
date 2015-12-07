@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import pytest
 
-from sopel.trigger import PreTrigger, Trigger
+from sopel.trigger import PreTrigger
 from sopel.tools import Identifier
 
 

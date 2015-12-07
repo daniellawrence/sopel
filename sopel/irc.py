@@ -15,7 +15,6 @@ documentation at http://www.irchelp.org/irchelp/rfc/
 from __future__ import unicode_literals, absolute_import, print_function, division
 
 import sys
-import re
 import time
 import socket
 import asyncore
@@ -25,9 +24,10 @@ import codecs
 import traceback
 from sopel.logger import get_logger
 from sopel.tools import stderr, Identifier
-from sopel.trigger import PreTrigger, Trigger
+from sopel.trigger import PreTrigger
+
+
 try:
-    import select
     import ssl
     if not hasattr(ssl, 'match_hostname'):
         # Attempt to import ssl_match_hostname from python-backports
@@ -158,8 +158,8 @@ class Bot(asynchat.async_chat):
         if text is not None:
             text = self.safe(text)
         try:
-            self.writing_lock.acquire()  # Blocking lock, can't send two things
-                                         # at a time
+            # Blocking lock, can't send two things at a time
+            self.writing_lock.acquire()
 
             # From RFC2812 Internet Relay Chat: Client Protocol
             # Section 2.3
@@ -534,4 +534,3 @@ class Bot(asynchat.async_chat):
                 os._exit(1)
         self.last_error_timestamp = datetime.now()
         self.error_count = self.error_count + 1
-

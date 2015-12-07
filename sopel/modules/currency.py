@@ -36,9 +36,9 @@ def get_rate(code):
     if headers['_http_status'] == 404:
         return False, False
     namespaces = {
-        'http://www.cbwiki.net/wiki/index.php/Specification_1.1': 'cb', 
-        'http://purl.org/rss/1.0/': None, 
-        'http://www.w3.org/1999/02/22-rdf-syntax-ns#': 'rdf' }
+        'http://www.cbwiki.net/wiki/index.php/Specification_1.1': 'cb',
+        'http://purl.org/rss/1.0/': None,
+        'http://www.w3.org/1999/02/22-rdf-syntax-ns#': 'rdf'}
     xml = xmltodict.parse(data, process_namespaces=True, namespaces=namespaces).get('rdf:RDF')
     namestring = xml.get('channel').get('title').get('#text')
     name = namestring[len('Bank of Canada noon rate: '):]
@@ -81,7 +81,7 @@ def display(bot, amount, of, to):
             return
     except Exception as e:
         raise
-        bot.reply("Something went wrong while I was getting the exchange rate.")
+        bot.reply("Something went wrong while I was getting the exchange rate. {0}".format(e))
         return NOLIMIT
 
     result = amount / of_rate * to_rate
@@ -92,7 +92,7 @@ def display(bot, amount, of, to):
 @commands('btc', 'bitcoin')
 @example('.btc 20 EUR')
 def bitcoin(bot, trigger):
-    #if 2 args, 1st is number and 2nd is currency. If 1 arg, it's either the number or the currency.
+    # if 2 args, 1st is number and 2nd is currency. If 1 arg, it's either the number or the currency.
     to = trigger.group(4)
     amount = trigger.group(3)
     if not to:

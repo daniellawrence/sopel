@@ -141,8 +141,9 @@ def redditor_info(bot, trigger, match=None):
         message = message + ' | 08Gold'
     if u.is_mod:
         message = message + ' | 05Mod'
-    message = message + (' | Link: ' + str(u.link_karma) + ' | Comment: '
-                         + str(u.comment_karma))
+    message = "{message} | Link {link_karma} | Comment: {comment_karma}".format(
+        message=message, link_karma=u.link_karma, comment_karma=u.comment_karma
+    )
 
     bot.say(message)
 

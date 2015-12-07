@@ -19,6 +19,7 @@ from sopel.db import SopelDB
 from sopel.test_tools import MockConfig
 from sopel.tools import Identifier
 
+
 db_filename = tempfile.mkstemp()[1]
 if sys.version_info.major >= 3:
     unicode = str
@@ -83,7 +84,7 @@ def test_get_nick_id(db):
 
 
 def test_alias_nick(db):
-    conn = sqlite3.connect(db_filename)
+    sqlite3.connect(db_filename)
     nick = 'Embolalia'
     aliases = ['EmbölaliÅ', 'Embo`work', 'Embo']
 
@@ -249,7 +250,7 @@ def test_get_nick_or_channel_value(db):
     assert db.get_nick_or_channel_value('#asdf', 'qwer', '/.,m')
 
 
-def test_get_nick_or_channel_value(db):
+def test_get_perferred_value(db):
     db.set_nick_value('asdf', 'qwer', 'poiu')
     db.set_channel_value('#asdf', 'qwer', '/.,m')
     db.set_channel_value('#asdf', 'lkjh', '1234')

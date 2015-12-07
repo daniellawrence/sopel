@@ -144,7 +144,7 @@ def url_handler(bot, trigger):
             positives = result['positives']
             total = result['total']
     except Exception as e:
-        LOGGER.debug('Error from checking URL with VT.', exc_info=True)
+        LOGGER.debug('Error from checking URL with VT. {0}'.format(e), exc_info=True)
         pass  # Ignoring exceptions with VT so MalwareDomains will always work
 
     if unicode(netloc).lower() in malware_domains:

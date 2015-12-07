@@ -77,7 +77,7 @@ def wa(bot, trigger):
         answer = web.get(uri + web.quote(query.replace('+', 'plus')), 45,
                          dont_decode=True)
     except timeout as e:
-        return bot.say('[WOLFRAM ERROR] Request timed out')
+        return bot.say('[WOLFRAM ERROR] Request timed out. {0}'.format(e))
     if answer:
         answer = answer.decode('unicode_escape')
         answer = HTMLParser.HTMLParser().unescape(answer)
@@ -98,8 +98,8 @@ def wa(bot, trigger):
                 bot.say('[WOLFRAM ERROR]' + answer)
         else:
 
-            bot.say('[WOLFRAM] ' + waOutputArray[0] + " = "
-                    + waOutputArray[1])
+            bot.say('[WOLFRAM] ' + waOutputArray[0] + " = " +
+                    waOutputArray[1])
         waOutputArray = []
     else:
         bot.reply('Sorry, no result.')

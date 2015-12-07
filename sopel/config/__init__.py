@@ -110,8 +110,8 @@ class Config(object):
         current = getattr(self, name, None)
         current_name = str(current.__class__)
         new_name = str(cls_)
-        if (current is not None and not isinstance(current, self.ConfigSection)
-                and not current_name == new_name):
+        if current is not None and not isinstance(current, self.ConfigSection) \
+           and not current_name == new_name:
             raise ValueError(
                 "Can not re-define class for section from {} to {}.".format(
                     current_name, new_name)
@@ -149,7 +149,7 @@ class Config(object):
             value = getattr(self, name)
             if not value:
                 return []
-            if isinstance(value, basestring):
+            if isinstance(value, (str, unicode)):
                 value = value.split(',')
                 # Keep the split value, so we don't have to keep doing this
                 setattr(self, name, value)
